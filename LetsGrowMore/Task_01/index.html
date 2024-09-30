@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title">The To Do List</div>
+        <div class="todo-header">My To Do List</div>
+        <div class="todo-input">
+            <input type="text" id="todo-input" placeholder="Title...">
+            <button onclick="addTodo()">Add</button>
+        </div>
+        <ul class="todo-list" id="todo-list">
+            <li class="todo-item">
+                <span>Hit the gym</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+            <li class="todo-item completed">
+                <span><i class="fas fa-check check"></i>Pay bills</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+            <li class="todo-item">
+                <span>Meet George</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+            <li class="todo-item">
+                <span>Buy eggs</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+            <li class="todo-item">
+                <span>Read a book</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+            <li class="todo-item">
+                <span>Organize office</span>
+                <span class="remove" onclick="removeTodo(this)">&times;</span>
+            </li>
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
