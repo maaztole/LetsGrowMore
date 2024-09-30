@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            background-color: #1c1c1c;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .display {
+            background-color: #d3d3d3;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .clear {
+            background-color: #ff0055;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .key {
+            background-color: #6a0dad;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+        }
+
+        .key.equal {
+            background-color: #ff0055;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="clear" onclick="clearDisplay()">C</div>
+        <div class="keys">
+            <div class="key" onclick="appendNumber('1')">1</div>
+            <div class="key" onclick="appendNumber('2')">2</div>
+            <div class="key" onclick="appendNumber('3')">3</div>
+            <div class="key" onclick="appendOperator('/')">/</div>
+            <div class="key" onclick="appendNumber('4')">4</div>
+            <div class="key" onclick="appendNumber('5')">5</div>
+            <div class="key" onclick="appendNumber('6')">6</div>
+            <div class="key" onclick="appendOperator('-')">-</div>
+            <div class="key" onclick="appendNumber('7')">7</div>
+            <div class="key" onclick="appendNumber('8')">8</div>
+            <div class="key" onclick="appendNumber('9')">9</div>
+            <div class="key" onclick="appendOperator('+')">+</div>
+            <div class="key" onclick="appendNumber('.')">.</div>
+            <div class="key" onclick="appendNumber('0')">0</div>
+            <div class="key equal" onclick="calculateResult()">=</div>
+            <div class="key" onclick="appendOperator('*')">*</div>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+        let operator = '';
+        let previousInput = '';
+
+        function appendNumber(number) {
+            if (currentInput === '0' && number === '0') return;
+            if (currentInput.includes('.') && number === '.') return;
+            currentInput += number;
+            display.innerText = currentInput;
+        }
+
+        function appendOperator(op) {
+            if (currentInput === '') return;
+            if (operator !== '') calculateResult();
+            operator = op;
+            previousInput = currentInput;
+            currentInput = '';
+        }
+
+        function calculateResult() {
+            if (currentInput === '' || previousInput === '') return;
+            let result;
+            switch (operator) {
+                case '+':
+                    result = parseFloat(previousInput) + parseFloat(currentInput);
+                    break;
+                case '-':
+                    result = parseFloat(previousInput) - parseFloat(currentInput);
+                    break;
+                case '*':
+                    result = parseFloat(previousInput) * parseFloat(currentInput);
+                    break;
+                case '/':
+                    result = parseFloat(previousInput) / parseFloat(currentInput);
+                    break;
+                default:
+                    return;
+            }
+            display.innerText = result;
+            currentInput = result;
+            operator = '';
+            previousInput = '';
+        }
+
+        function clearDisplay() {
+            currentInput = '';
+            operator = '';
+            previousInput = '';
+            display.innerText = '0';
+        }
+    </script>
+</body>
+</html>
